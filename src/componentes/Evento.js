@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Evento = (props) => {
 
@@ -9,7 +10,7 @@ const Evento = (props) => {
     let desc = props.info.description.text;
 
     if (desc.length > 250) {
-        desc = desc.substr(0, 250);
+        desc = desc.substr(0, 300);
     }
 
     return (
@@ -34,6 +35,10 @@ const Evento = (props) => {
             </div>
         </div>
     )
+};
+
+Evento.propTypes = {
+    info : PropTypes.object.isRequired
 };
 
 export default Evento;
