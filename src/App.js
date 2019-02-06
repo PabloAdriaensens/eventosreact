@@ -5,9 +5,11 @@ import Formulario from "./componentes/Formulario";
 class App extends Component {
 
     token = 'EH7Z24DKZZBOLOBDL56D';
+    ordenar = 'date';
 
     state = {
-        categorias: []
+        categorias: [],
+        eventos: []
     };
 
     componentDidMount() {
@@ -29,7 +31,17 @@ class App extends Component {
     };
 
     obtenerEventos = async (busqueda) => {
-        console.log(busqueda);
+        let url = `https://www.eventbriteapi.com/v3/events/search/?q=${busqueda.nombre}&categories=${busqueda.categoria}&sort_by=${this.ordenar}&token=${this.token}&locale=es_ES`;
+
+        await fetch(url)
+            .then(respuesta => {
+                return respuesta.json();
+            })
+            .then(eventos => {
+                this.setState({
+                    eventos: eventos.events
+                })
+            })
     };
 
     render() {
